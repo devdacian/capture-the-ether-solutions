@@ -4,7 +4,7 @@ pragma solidity ^0.8.17;
 contract GuessTheRandomNumberChallenge {
     uint8 answer;
 
-    function GuessRandomNumberChallenge() public payable {
+    constructor() payable {
         require(msg.value == 1 ether);
         answer = uint8(uint(keccak256(abi.encodePacked(blockhash(block.number - 1), block.timestamp))));
     }
@@ -23,6 +23,10 @@ contract GuessTheRandomNumberChallenge {
 }
 
 contract GuessRandomNumberAttack {
+  constructor() payable {
+    require(msg.value == 1 ether);
+  }
+
   function attack (address payable vulnContractAddr) external {
     GuessTheRandomNumberChallenge vulnContract = GuessTheRandomNumberChallenge(vulnContractAddr);
 

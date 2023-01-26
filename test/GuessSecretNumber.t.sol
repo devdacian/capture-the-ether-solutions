@@ -9,12 +9,8 @@ contract GuessSecretNumberTest is Test {
     GuessSecretNumberAttack       attackContract;
  
     function setUp() public {
-        vulnContract   = new GuessTheSecretNumberChallenge();
-        attackContract = new GuessSecretNumberAttack();
-
-        // both vulnerable & attacker contracts start with 1 ether
-        deal(address(vulnContract), 1 ether);
-        deal(address(attackContract), 1 ether);
+        vulnContract   = new GuessTheSecretNumberChallenge{value: 1 ether}();
+        attackContract = new GuessSecretNumberAttack{value: 1 ether}();
     }
 
     // verify initial state. Best practice to have no assertions in setUp()

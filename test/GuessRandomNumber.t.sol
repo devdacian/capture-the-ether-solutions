@@ -9,13 +9,8 @@ contract GuessRandomNumberTest is Test {
     GuessRandomNumberAttack       attackContract;
  
     function setUp() public {
-        vulnContract   = new GuessTheRandomNumberChallenge();
-        attackContract = new GuessRandomNumberAttack();
-
-        // attacker contract requires 1 ether to execute attack
-        deal(address(attackContract), 1 ether); 
-        // initializes challenge, requires 1 ether sent to vuln contract
-        vulnContract.GuessRandomNumberChallenge{value: 1 ether}();
+        vulnContract   = new GuessTheRandomNumberChallenge{value: 1 ether}();
+        attackContract = new GuessRandomNumberAttack{value: 1 ether}();
     }
 
     // verify initial state. Best practice to have no assertions in setUp()

@@ -4,7 +4,7 @@ pragma solidity ^0.8.17;
 contract GuessTheSecretNumberChallenge {
     bytes32 answerHash = 0xdb81b4d58595fbbbb592d3661a34cdca14d7ab379441400cbfa1b78bc447c365;
 
-    function GuessSecretNumberChallenge() public payable {
+    constructor() payable {
         require(msg.value == 1 ether);
     }
     
@@ -22,6 +22,11 @@ contract GuessTheSecretNumberChallenge {
 }
 
 contract GuessSecretNumberAttack {
+  
+  constructor() payable {
+    require(msg.value == 1 ether);
+  }
+
   function attack (address payable vulnContractAddr) external {
     GuessTheSecretNumberChallenge vulnContract = GuessTheSecretNumberChallenge(vulnContractAddr);
 
